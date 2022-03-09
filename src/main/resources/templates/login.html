@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title th:text="${title}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="blocks/header.html :: css" />
+
+<body>
+
+	<th:block th:insert="blocks/navBar.html :: navBar" />
+	<div class="container">
+		<div class="row justify-content-center p-2" th:if="${param.error}">Invalid
+			username and password.</div>
+		<div class="row justify-content-center p-2" th:if="${param.logout}">You
+			have been logged out.</div>
+		<form th:action="@{/login}" method="post">
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm p-1" style="text-align: right">User Name :</div>
+				<div class="col-sm p-1">
+					<input type="text" name="username" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1 justify-content-end"
+					style="text-align: right">Password:</div>
+				<div class="col-sm  p-1">
+					<input type="password" name="password" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1" style="text-align: right" >
+				<input class="btn btn-success" type="submit" value="Sign In" />
+				</div>
+				<div class="col-sm  p-1">
+				<a class="btn btn-secondary" th:href="@{/register}">Register
+					new user</a>
+					</div>
+			</div>
+		</form>
+	</div>
+
+
+	<th:block th:insert="blocks/scripts.html :: js" />
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block th:fragment="navBar">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">Newsstand</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> ADMIN </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/release}">Release</a>
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/product}">Product</a>
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/publisher}">Publisher</a>
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/category}">Categories</a>
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/frequency}">Frequency</a>
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/language}">Language</a>
+						<div class="dropdown-divider"></div>
+
+						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/orders}">Order list</a>
+
+
+					</div></li>
+
+				<li sec:authorize="hasAuthority('USER')" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> User profile </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/sold}">The list of selected issues</a>
+						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/user/address}">Addresses</a>
+						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/user/orders}">Orders</a>
+
+					</div>
+				</li>
+			</ul>
+
+			<div class="navbar-text" sec:authorize="!isAuthenticated()">
+			<form class="form-inline my-2 my-lg-0"
+				th:action="@{/login}" method="get">
+				Hello, Anonymous!&nbsp; <input class ="btn btn-outline-success" type="submit" value="Sign In" />
+			</form>
+			</div>
+
+			<div class="navbar-text" sec:authorize="isAuthenticated()">
+			<form class="form-inline my-2 my-lg-0"
+				th:action="@{/logout}" method="post">
+				Hello,&nbsp;<span sec:authentication="principal.username">Anonymous&nbsp; </span>!&nbsp;
+					<input class ="btn btn-outline-success" type="submit" value="Sign Out" />
+				
+			</form>
+			</div >
+
+<!--			<div class="navbar-text my-rg-2">-->
+<!--				 Cart ()-->
+<!--			</div>-->
+
+		</div>
+	</nav>
+
+
+</th:block>
+</html>

@@ -2,6 +2,8 @@ package by.asalalaiko.service;
 
 import by.asalalaiko.domain.User;
 
+import java.util.List;
+
 public interface UserService {
 
     void lockUnlockById(Long id);
@@ -10,5 +12,5 @@ public interface UserService {
 
     User findByLogin(String login);
 
-
+     List<User> findAll();
 }
