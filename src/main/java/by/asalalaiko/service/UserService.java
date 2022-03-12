@@ -12,5 +12,11 @@ public interface UserService {
 
     User findByLogin(String login);
 
-     List<User> findAll();
+    boolean addUser(User user);
+
+    public void saveUser(User user);
+
+    void deleteUser(Long id);
+
+     List<User> findAllUsers();
 }

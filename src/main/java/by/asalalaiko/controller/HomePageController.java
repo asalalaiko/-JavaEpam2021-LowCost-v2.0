@@ -15,7 +15,7 @@ public class HomePageController {
     @GetMapping("/")
     public String Home (Model model){
         model.addAttribute("title", "Main page");
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAllUsers());
         return "index";
     }
 
@@ -23,7 +23,7 @@ public class HomePageController {
     @GetMapping("/index")
     public String index (Model model){
         model.addAttribute("title", "Main page");
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAllUsers());
         return "index";
     }
 }
