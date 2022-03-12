@@ -14,9 +14,17 @@
         <div class="container border-5" >
             <tr th:each="user : ${users}">
                 <td>
-                    <span th:text="${user.id}"></span> : <span th:text="${user.login}"></span><br>
+                    <span th:text="${user.id}"></span> : <span th:text="${user.login}"></span> : <span th:text="${user.password}"></span><br>
                 </td>
             </tr>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            This content is only shown to authenticated users.
+        </div>
+
+        <div sec:authorize="!isAuthenticated()">
+            This content is only shown to NOT authenticated users.
         </div>
 
         <th:block th:insert="blocks/scripts.html :: js" />

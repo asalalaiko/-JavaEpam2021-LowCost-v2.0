@@ -18,6 +18,11 @@ public class UserAuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepo.findByLogin(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
         return user;
     }
 }

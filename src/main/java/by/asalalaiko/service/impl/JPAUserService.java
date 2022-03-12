@@ -25,7 +25,7 @@ public class JPAUserService implements UserService {
 
     @Override
     public User findByLogin(String login) {
-        return null;
+        return userRepo.findByLogin(login);
     }
 
     @Override
