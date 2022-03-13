@@ -34,6 +34,7 @@ public class User implements UserDetails {
     private LocalDateTime created;
     @Column(name = "locked")
     private Boolean locked;
+    @NotNull
     @Column(name = "email")
     private String email;
     @Column(name = "role")

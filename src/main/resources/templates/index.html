@@ -17,16 +17,16 @@
                     <span th:text="${user.id}"></span> : <span th:text="${user.login}"></span> : <span th:text="${user.password}"></span><br>
                 </td>
             </tr>
-        </div>
 
-        <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-        </div>
+            <br><br>
+            <div sec:authorize="isAuthenticated()">
+                This content is only shown to authenticated users.
+            </div>
 
-        <div sec:authorize="!isAuthenticated()">
-            This content is only shown to NOT authenticated users.
+            <div sec:authorize="!isAuthenticated()">
+                This content is only shown to NOT authenticated users.
+            </div>
         </div>
-
 <!--        <th:block th:insert="blocks/scripts.html :: js" />-->
     </body>
 </html>

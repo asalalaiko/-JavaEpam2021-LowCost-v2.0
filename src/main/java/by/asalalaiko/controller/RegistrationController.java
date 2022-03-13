@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class RegistrationController {
     String registerPage(@RequestParam("g-recaptcha-response") String captchaResponse,
                         @Valid User user,
                         BindingResult bindingResult,
-                        Model model) {
+                        Model model) throws MessagingException {
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(
                 url, Collections.emptyList(), CaptchaResponseDto.class);
@@ -60,12 +61,6 @@ public class RegistrationController {
 
         if (!response.isSuccess()) {
             model.addAttribute("captchaError", "Fill captcha");
-        }
-
-
-
-        if (user.getPassword() != null ) {
-            model.addAttribute("passwordError", "Passwords are different!");
         }
 
         if (bindingResult.hasErrors() || !response.isSuccess()) {

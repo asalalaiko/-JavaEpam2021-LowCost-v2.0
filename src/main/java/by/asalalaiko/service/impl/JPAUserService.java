@@ -2,12 +2,14 @@ package by.asalalaiko.service.impl;
 
 import by.asalalaiko.domain.User;
 import by.asalalaiko.domain.UsersRole;
+import by.asalalaiko.mail.EmailService;
 import by.asalalaiko.repo.UserRepo;
 import by.asalalaiko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +21,8 @@ public class JPAUserService implements UserService {
     private UserRepo userRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    public EmailService emailService;
 
     @Override
     public void lockUnlockById(Long id) {}
@@ -35,7 +38,7 @@ public class JPAUserService implements UserService {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(User user) throws MessagingException {
         User userFromDb = userRepo.findByLogin(user.getLogin());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -51,8 +54,9 @@ public class JPAUserService implements UserService {
         user.setRole(UsersRole.USER);
         user.setActionCode(UUID.randomUUID().toString());
 
-
         saveUser(user);
+        sendActivationCodeToNewUser(user);
+
         return true;
     }
 
@@ -71,5 +75,16 @@ public class JPAUserService implements UserService {
         return userRepo.findAll();
     }
 
+
+
+    public void sendActivationCodeToNewUser(User user) throws MessagingException {
+        String subject = "Send you activation code";
+        String text = "To activate the user follow the link " +
+                        "<a href='http://localhost:8080/activate?code=" + user.getActionCode() +
+                        "'>ACTIVATE</a>";;
+
+        emailService.sendSimpleMessage(user.getEmail(), subject, text);
+        emailService.sendHtmlMessage(user.getEmail(), subject, text);
+    }
 
 }

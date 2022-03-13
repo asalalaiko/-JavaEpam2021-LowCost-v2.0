@@ -2,6 +2,7 @@ package by.asalalaiko.service;
 
 import by.asalalaiko.domain.User;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
 
     User findByLogin(String login);
 
-    boolean addUser(User user);
+    boolean addUser(User user) throws MessagingException;
 
     public void saveUser(User user);
 
