@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+      <body>
+
+        <th:block th:insert="blocks/navBar.html :: navBar" />
+
+
+        <div class="container border-5" >
+            <table class="table table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Data reg.</th>
+                    <th scope="col">Activation code</th>
+                    <th scope="col">Locked</th>
+                    <th scope="col">Activated</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}" />
+                        <td th:text="${user.login}" />
+                        <td th:text="${user.firstName}" />
+                        <td th:text="${user.lastName}" />
+                        <td th:text="${user.email}" />
+                        <td th:text="${user.created}" />
+                        <td th:text="${user.actionCode}" />
+                        <td th:text="${user.locked}" />
+                        <td th:text="${user.active}" />
+                        <td><a href="URL">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+<!--        <th:block th:insert="blocks/scripts.html :: js" />-->
+    </body>
+</html>

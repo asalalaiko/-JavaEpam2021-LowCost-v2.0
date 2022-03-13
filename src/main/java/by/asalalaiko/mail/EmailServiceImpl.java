@@ -62,14 +62,5 @@ public class EmailServiceImpl implements EmailService{
 
 
 
-    @Override
-    public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
-
-    }
-
-    @Override
-    public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel) throws IOException, MessagingException {
-
-    }
 
 }
