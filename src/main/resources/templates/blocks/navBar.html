@@ -23,24 +23,9 @@
 				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item active"><a class="nav-link" th:href="@{/admin/city}">Cities
 					<span class="sr-only">(current)</span>
 				</a></li>
-
-				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> ADMIN </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/release}">Release</a>
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/product}">Product</a>
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/publisher}">Publisher</a>
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/category}">Categories</a>
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/frequency}">Frequency</a>
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/language}">Language</a>
-						<div class="dropdown-divider"></div>
-
-						<a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/admin/orders}">Order list</a>
-
-
-					</div></li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item active"><a class="nav-link" th:href="@{/admin/airport}">Airports
+					<span class="sr-only">(current)</span>
+				</a></li>
 
 				<li sec:authorize="hasAuthority('USER')" class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"

@@ -39,7 +39,7 @@ public class CityAdminController {
     }
 
     @GetMapping("/admin/city/delete")
-    public String deleteLanguage(@RequestParam(value="id") Long id){
+    public String deleteCity(@RequestParam(value="id") Long id){
         cityService.deleteById(id);
         return "redirect:/admin/city";
     }
@@ -47,7 +47,7 @@ public class CityAdminController {
 
 
     @GetMapping("/admin/city/edit")
-    public String getAllCities(@RequestParam(value="id") Long id, Model model){
+    public String getCityToEdit (@RequestParam(value="id") Long id, Model model){
         model.addAttribute("title", "Admin - Cities list");
         model.addAttribute("city", cityService.getCityById(id));
         model.addAttribute("cities", cityService.getCities());

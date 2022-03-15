@@ -3,24 +3,24 @@ package by.asalalaiko.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "city")
-public class City {
-
+@Table(name = "airport")
+public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     @Column(name = "name", unique = true)
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", fetch = FetchType.LAZY)
-    private List<Airport> airports;
+    @Column
+    private BigDecimal tax;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-
-
-    public City() {
+    public Airport() {
     }
 
     public Long getId() {
@@ -39,11 +39,19 @@ public class City {
         this.name = name;
     }
 
-    public List<Airport> getAirports() {
-        return airports;
+    public City getCity() {
+        return city;
     }
 
-    public void setAirportList(List<Airport> airportList) {
-        this.airports = airports;
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
     }
 }

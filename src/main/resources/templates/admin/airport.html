@@ -12,30 +12,54 @@
 
 <div class="container border-5">
     <div class="row justify-content-center  p-1">
-        <form method="post" th:action="@{/admin/city}" th:object="${city}">
-            <input  type="hidden" name="id" th:field="${city.id}"/>
+        <form method="post" th:action="@{/admin/airport}" th:object="${airport}">
+            <input  type="hidden" name="id" th:field="${airport.id}"/>
             <input  type="text" name="name" th:field="*{name}"/>
-            <button type="submit">Add</button>
+            <input  type="number" step="0.01" min="0" name="name" th:field="*{tax}"/>
+
+            <select name="city" th:field="${airport.city}">
+<!--                <option selected="selected" disabled>Select city</option>-->
+                <option
+                        th:each="city : ${cities}"
+                        th:value="${city.id}" th:text="${city.name}"
+                >
+                </option>
+            </select>
+
+<!--            <c:forEach items="${cities}" var="city">-->
+<!--                <option value=${city.id}-->
+<!--                <c:if test="${airport.city.id == city.id}"> selected="selected"</c:if>-->
+<!--                >${city.name}-->
+<!--                </option>-->
+<!--            </c:forEach>-->
+<!--            -->
+
+            <button type="submit">save</button>
         </form>
     </div>
     <table class="table table-sm">
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Name city</th>
+            <th scope="col">Name airport</th>
+            <th scope="col">TAX airport</th>
+            <th scope="col">City</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
 
-        <tr th:each="city : ${cities}">
+        <tr th:each="airport : ${airports}">
 
-            <td th:text="${city.id}" />
-            <td th:text="${city.name}" />
+            <td th:text="${airport.id}" />
+            <td th:text="${airport.name}" />
+            <td th:text="${airport.tax}" />
+            <td th:text="${airport.city.name}" />
+
             <td>
                 <a class="btn btn-danger"
-                   th:href="@{'/admin/city/delete?id='+${city.id}}">Delete</a>
+                   th:href="@{'/admin/airport/delete?id='+${airport.id}}">Delete</a>
                 <a class="btn btn-success"
-                   th:href="@{'/admin/city/edit?id='+${city.id}}">Edit</a> </td>
+                   th:href="@{'/admin/airport/edit?id='+${airport.id}}">Edit</a> </td>
 
         </tr>
     </table>
