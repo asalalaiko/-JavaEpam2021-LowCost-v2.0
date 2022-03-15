@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+
+<div class="container border-5">
+    <div class="row justify-content-center  p-1">
+        <form method="post" th:action="@{/admin/city}" th:object="${city}">
+            <input  type="hidden" name="id" th:field="${city.id}"/>
+            <input  type="text" name="name" th:field="*{name}"/>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name city</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+
+        <tr th:each="city : ${cities}">
+
+            <td th:text="${city.id}" />
+            <td th:text="${city.name}" />
+            <td>
+                <a class="btn btn-danger"
+                   th:href="@{'/admin/city/delete?id='+${city.id}}">Delete</a>
+                <a class="btn btn-success"
+                   th:href="@{'/admin/city/edit?id='+${city.id}}">Edit</a> </td>
+
+        </tr>
+    </table>
+</div>
+</div>
+</div>
+
+</body>
+</html>
