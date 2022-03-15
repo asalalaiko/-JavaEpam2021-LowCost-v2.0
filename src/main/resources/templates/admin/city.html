@@ -31,8 +31,12 @@
             <tr th:each="city : ${cities}">
 
                 <td th:text="${city.id}" />
-                <td />
                 <td th:text="${city.name}" />
+                <td>
+                    <div th:each="airport : ${city.airports}">
+                        <div th:text="${airport.name}" />
+                    </div>
+                </td>
                 <td>
                     <a class="btn btn-danger"
                        th:href="@{'/admin/city/delete?id='+${city.id}}">Delete</a>
