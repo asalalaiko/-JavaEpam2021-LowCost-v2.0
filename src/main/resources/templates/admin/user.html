@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+      <body>
+
+        <th:block th:insert="blocks/navBar.html :: navBar" />
+
+
+        <div class="container border-5" >
+            <form method="post" th:action="@{/admin/user/edit}" th:object="${user}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputLogin">Login</label>
+                        <input type="text" class="form-control" id="inputLogin" th:value="${user.login}" th:field="*{login}" placeholder="Login">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" th:value="${user.password}" th:field="*{password}" placeholder="Password" disabled>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputFName">First Name</label>
+                        <input type="text" class="form-control" id="inputFName" th:value="${user.firstName}" th:field="*{firstName}" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLName">Last Name</label>
+                        <input type="text" class="form-control" id="inputLName" th:value="${user.lastName}" th:field="*{lastName}" placeholder="Last Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail">E-mail</label>
+                        <input type="text" class="form-control" id="inputEmail" th:value="${user.email}" th:field="*{email}" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="inputData">Data reg.</label>
+                        <input type="text" class="form-control" id="inputData" th:value="${user.created}"  placeholder="Data">
+                    </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputregCode">Activation code</label>
+                            <input type="text" class="form-control" id="inputregCode" th:value="${user.actionCode}" placeholder="Data" disabled>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="activeCheck">
+                            <label class="form-check-label" for="activeCheck">
+                                Activated
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="blockCheck">
+                            <label class="form-check-label" for="blockCheck">
+                                Blocked
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+
+                    <a class="btn btn-secondary" th:href="@{/admin/users}">Users list</a>
+
+            </form>
+        </div>
+
+<!--        <th:block th:insert="blocks/scripts.html :: js" />-->
+    </body>
+</html>

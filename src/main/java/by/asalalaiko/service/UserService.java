@@ -4,6 +4,7 @@ import by.asalalaiko.domain.User;
 
 import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -11,7 +12,7 @@ public interface UserService {
 
     User activateUser(String code);
 
-    User findByLogin(String login);
+    User getUser (Long id);
 
     boolean addUser(User user) throws MessagingException;
 

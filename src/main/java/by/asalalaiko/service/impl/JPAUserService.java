@@ -6,12 +6,14 @@ import by.asalalaiko.mail.EmailService;
 import by.asalalaiko.repo.UserRepo;
 import by.asalalaiko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,9 +34,10 @@ public class JPAUserService implements UserService {
         return null;
     }
 
+
     @Override
-    public User findByLogin(String login) {
-        return userRepo.findByLogin(login);
+    public User getUser(Long id) {
+        return userRepo.getOne(id);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class JPAUserService implements UserService {
         user.setActionCode(UUID.randomUUID().toString());
 
         saveUser(user);
-        sendActivationCodeToNewUser(user);
+        sendActivationCodeToUser(user);
 
         return true;
     }
@@ -72,19 +75,19 @@ public class JPAUserService implements UserService {
 
     @Override
     public List<User> findAllUsers() {
-        return userRepo.findAll();
+        return userRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
 
 
-    public void sendActivationCodeToNewUser(User user) throws MessagingException {
+    public void sendActivationCodeToUser(User user) throws MessagingException {
         String subject = "Send you activation code";
         String text = "To activate the user follow the link " +
                         "<a href='http://localhost:8080/activate?code=" + user.getActionCode() +
                         "'>ACTIVATE</a>";;
 
-        emailService.sendSimpleMessage(user.getEmail(), subject, text);
         emailService.sendHtmlMessage(user.getEmail(), subject, text);
     }
 
-}
+
+    }
