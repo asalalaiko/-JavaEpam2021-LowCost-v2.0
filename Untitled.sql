@@ -10,7 +10,7 @@ CREATE TABLE "users" (
   "role" varchar
 );
 
-CREATE TABLE "plaine" (
+CREATE TABLE "plane" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "model" varchar,
