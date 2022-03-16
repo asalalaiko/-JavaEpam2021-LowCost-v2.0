@@ -1,6 +1,8 @@
 package by.asalalaiko.domain;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -14,8 +16,10 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime start;
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime finish;
     @Column
     private Integer km;
