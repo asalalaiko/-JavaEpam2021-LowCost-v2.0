@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+
+    <div class="container border-5">
+            <div class="row justify-content-center  p-1">
+                <form method="post" th:action="@{/admin/flight}" th:object="${flight}">
+                    <input type="hidden" name="id" th:field="*{id}"/>
+<!--                    <input type="datetime-local" name="start" th:field="*{start}">-->
+                    <select name="startAirport" th:field="*{startAirport}">
+                        <option
+                                th:each="airport : ${airports}"
+                                th:value="${airport.id}" th:text="${airport.name}+' ('+${airport.city.name}+')'"
+                        >
+                        </option>
+                    </select>
+<!--                    <input type="datetime-local" name="finish" th:field="*{finish}">-->
+<!--                    <select name="finishAirport" th:field="*{finishAirport}">-->
+<!--                        <option-->
+<!--                                th:each="airport : ${airports}"-->
+<!--                                th:value="${airport.id}" th:text="${airport.name}+' ('+${airport.city.name}+')'"-->
+<!--                        >-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                    <input  type="number" name="km" th:field="*{km}" step="1" min="0" placeholder="distance"/>-->
+<!--                    <select name="plane" th:field="*{plane}">-->
+<!--                        <option-->
+<!--                                th:each="plane : ${planes}"-->
+<!--                                th:value="${plane.id}" th:text="${plane.name}+' ('+${plane.model}+')'"-->
+<!--                        >-->
+<!--                        </option>-->
+<!--                    </select>-->
+
+<!--                    <input  type="number" name="costBaggage" th:field="*{costBaggage}" step="0.01" min="0" placeholder="Baggage"/>-->
+<!--                    <input  type="number" name="costPriority" th:field="*{costPriority}" step="0.01" min="0" placeholder="Priority"/>-->
+                    <button type="submit">save</button>
+                </form>
+            </div>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Start</th>
+                <th scope="col">Finish</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Plane</th>
+                <th scope="col">Cost Ticket</th>
+                <th scope="col">Cost Baggage</th>
+                <th scope="col">Cost Priority</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+
+            <tr th:each="flight : ${flights}">
+
+                <td th:text="${flight.id}" />
+                <td th:text="${flight.startAirport.city.name}+'('+${flight.start.}+')'" />
+                <td th:text="${flight.finishAirport.city.name}+'('+${flight.finish}+')'" />
+                <td th:text="${flight.km}" />
+                <td th:text="${flight.plane.name} + '(' +${flight.plane.model}+')'" />
+                <td th:text="${flight.cost}" />
+                <td th:text="${flight.costBaggage}" />
+                <td th:text="${flight.costPriority}" />
+
+                <td>
+                    <a class="btn btn-danger"
+                       th:href="@{'/admin/flight/delete?id='+${flight.id}}">Delete</a>
+                    <a class="btn btn-success"
+                       th:href="@{'/admin/flight/edit?id='+${flight.id}}">Edit</a> </td>
+
+            </tr>
+        </table>
+    </div>
+    </div>
+    </div>
+
+</body>
+</html>

@@ -15,14 +15,14 @@ public class Plane {
     @Column(name = "name", unique = true)
     private String name;
     @NotNull
-    @Column(name = "model", unique = true)
+    @Column(name = "model")
     private String model;
     @Column
     private Integer passenger_seats;
     @Column
     private BigDecimal cost_1km;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", fetch = FetchType.LAZY)
-//    private List<Airport> airports;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "plane", fetch = FetchType.LAZY)
+    private List<Flight> flights;
 
 
     public Plane() {
@@ -67,5 +67,13 @@ public class Plane {
 
     public void setCost_1km(BigDecimal cost_1km) {
         this.cost_1km = cost_1km;
+    }
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 }
