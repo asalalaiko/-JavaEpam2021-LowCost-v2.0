@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -44,6 +45,8 @@ public class User implements UserDetails {
     private Boolean active;
     @Column(name = "action_code")
     private String actionCode;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 
     public Long getId() {
         return id;

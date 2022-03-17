@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+
+    <div class="container border-5">
+<!--            <div class="row justify-content-center  p-1">-->
+<!--                <form method="post" th:action="@{/admin/ticket}" th:object="${ticket}">-->
+<!--                    <input  type="hidden" name="id" th:field="*{flight}"/>-->
+<!--                    <input  type="text" name="name" th:field="*{name}"/>-->
+<!--                    <input  type="text" name="model" th:field="*{model}"/>-->
+<!--                    <input  type="number" name="passenger_seats" th:field="*{passenger_seats}" step="1" min="0"/>-->
+<!--                    <input  type="number" name="cost_1km" th:field="*{cost_1km}" step="0.01" min="0"/>-->
+<!--                    <button type="submit">save</button>-->
+<!--                </form>-->
+<!--            </div>-->
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Flight</th>
+                <th scope="col">User</th>
+                <th scope="col">Passenger</th>
+                <th scope="col">Status</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Baggage</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+
+            <tr th:each="ticket : ${tickets}">
+
+                <td th:text="${ticket.id}" />
+                <td th:text="${ticket.flight.id}" />
+                <td> th:text="${ticket.user.login}" </td>
+                <td th:text="${ticket.passenger}" />
+                <td th:text="${ticket.status}" />
+                <td th:text="${ticket.priority}" />
+                <td th:text="${ticket.baggage}" />
+
+
+<!--                <td>-->
+<!--                    <a class="btn btn-danger"-->
+<!--                       th:href="@{'/admin/plane/delete?id='+${ticket.id}}">Delete</a>-->
+<!--                    <a class="btn btn-success"-->
+<!--                       th:href="@{'/admin/plane/edit?id='+${ticket.id}}">Edit</a> </td>-->
+
+<!--            </tr>-->
+        </table>
+    </div>
+    </div>
+    </div>
+
+</body>
+</html>

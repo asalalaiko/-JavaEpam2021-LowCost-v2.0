@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "flight")
@@ -33,11 +34,16 @@ public class Flight {
     @JoinColumn(name = "plane_id")
     private Plane plane;
     @Column
-    private BigDecimal cost;
+    private BigDecimal min_ticket_cost;
+    @Column
+    private BigDecimal profit;
     @Column
     private BigDecimal costBaggage;
     @Column
     private BigDecimal costPriority;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "flight", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
+
 
     public Flight() {
     }
@@ -98,14 +104,6 @@ public class Flight {
         this.plane = plane;
     }
 
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
     public BigDecimal getCostBaggage() {
         return costBaggage;
     }
@@ -122,5 +120,19 @@ public class Flight {
         this.costPriority = costPriority;
     }
 
+    public BigDecimal getMin_ticket_cost() {
+        return min_ticket_cost;
+    }
 
+    public void setMin_ticket_cost(BigDecimal min_ticket_cost) {
+        this.min_ticket_cost = min_ticket_cost;
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
+    }
 }

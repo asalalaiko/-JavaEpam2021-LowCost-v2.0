@@ -30,17 +30,14 @@
                         >
                         </option>
                     </select>
-<!--                    <input  type="number" name="km" th:field="*{km}" step="1" min="0" placeholder="distance"/>-->
-<!--                    <select name="plane" th:field="*{plane}">-->
-<!--                        <option-->
-<!--                                th:each="plane : ${planes}"-->
-<!--                                th:value="${plane.id}" th:text="${plane.name}+' ('+${plane.model}+')'"-->
-<!--                        >-->
-<!--                        </option>-->
-<!--                    </select>-->
-
-<!--                    <input  type="number" name="costBaggage" th:field="*{costBaggage}" step="0.01" min="0" placeholder="Baggage"/>-->
-<!--                    <input  type="number" name="costPriority" th:field="*{costPriority}" step="0.01" min="0" placeholder="Priority"/>-->
+                    <input  type="number" name="km" th:field="*{km}" step="1" min="0" placeholder="distance"/>
+                    <select name="plane" th:field="*{plane}">
+                        <option
+                                th:each="plane : ${planes}"
+                                th:value="${plane.id}" th:text="${plane.name}+' ('+${plane.model}+')'"
+                        >
+                        </option>
+                    </select>
                     <button type="submit">save</button>
                 </form>
             </div>
@@ -52,7 +49,8 @@
                 <th scope="col">Finish</th>
                 <th scope="col">Distance</th>
                 <th scope="col">Plane</th>
-                <th scope="col">Cost Ticket</th>
+                <th scope="col">Cost Ticket(min)</th>
+                <th scope="col">Profit coefficient</th>
                 <th scope="col">Cost Baggage</th>
                 <th scope="col">Cost Priority</th>
                 <th scope="col">Action</th>
@@ -62,11 +60,12 @@
             <tr th:each="flight : ${flights}">
 
                 <td th:text="${flight.id}" />
-                <td th:text="${flight.startAirport.city.name}+'('+${flight.start}+')'" />
-<!--                <td th:text="${flight.finishAirport.city.name}+'('+${flight.finish}+')'" />-->
+                <td th:text="${flight.startAirport.city.name}+' ('+${flight.start}+')'" />
+                <td th:text="${flight.finishAirport.city.name}+' ('+${flight.finish}+')'" />
                 <td th:text="${flight.km}" />
-<!--                <td th:text="${flight.plane.name} + '(' +${flight.plane.model}+')'" />-->
-                <td th:text="${flight.cost}" />
+                <td th:text="${flight.plane.name} + ' (' +${flight.plane.model}+')'" />
+                <td th:text="${flight.min_ticket_cost}" />
+                <td th:text="${flight.profit}" />
                 <td th:text="${flight.costBaggage}" />
                 <td th:text="${flight.costPriority}" />
 
