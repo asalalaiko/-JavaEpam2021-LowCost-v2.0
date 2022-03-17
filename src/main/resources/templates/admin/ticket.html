@@ -39,11 +39,11 @@
 
                 <td th:text="${ticket.id}" />
                 <td th:text="${ticket.flight.id}" />
-                <td> th:text="${ticket.user.login}" </td>
+                <td th:text="${ticket?.user?.login}" />
                 <td th:text="${ticket.passenger}" />
                 <td th:text="${ticket.status}" />
-                <td th:text="${ticket.priority}" />
-                <td th:text="${ticket.baggage}" />
+                <td th:text="${ticket.priority?.booleanValue()}" />
+                <td th:text="${ticket.baggage?.booleanValue()}" />
 
 
 <!--                <td>-->
