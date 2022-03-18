@@ -54,12 +54,5 @@ public class UserAdminController {
 }
 
 
-//    @PostMapping("/admin/language/edit")
-//    public String editLanguagey(@RequestParam (value="id") Integer id, @RequestParam String name) {
-//        Language language = languageService.getLanguage(id);
-//        language.setName(name);
-//        languageService.saveLanguage(language);
-//        return "redirect:/admin/language";
-//    }
 
 }

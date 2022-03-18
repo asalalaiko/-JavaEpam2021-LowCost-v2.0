@@ -51,6 +51,7 @@
                 <th scope="col">Plane</th>
                 <th scope="col">Cost Ticket(min)</th>
                 <th scope="col">Profit coefficient</th>
+                <th scope="col">Cost Ticket</th>
                 <th scope="col">Cost Baggage</th>
                 <th scope="col">Cost Priority</th>
                 <th scope="col">Action</th>
@@ -66,6 +67,7 @@
                 <td th:text="${flight.plane.name} + ' (' +${flight.plane.model}+')'" />
                 <td th:text="${flight.min_ticket_cost}" />
                 <td th:text="${flight.profit}" />
+                <td th:text="${flight.ticket_cost}" />
                 <td th:text="${flight.costBaggage}" />
                 <td th:text="${flight.costPriority}" />
 

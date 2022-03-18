@@ -10,23 +10,30 @@
 
         <th:block th:insert="blocks/navBar.html :: navBar" />
 
-
-        <div class="container border-5" >
-            <tr th:each="user : ${users}">
-                <td>
-                    <span th:text="${user.id}"></span> : <span th:text="${user.login}"></span> : <span th:text="${user.password}"></span><br>
-                </td>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Start</th>
+                <th scope="col">Finish</th>
+                <th scope="col">Cost Ticket</th>
+                <th scope="col">Booking</th>
             </tr>
+            </thead>
 
-            <br><br>
-            <div sec:authorize="isAuthenticated()">
-                This content is only shown to authenticated users.
-            </div>
+            <tr th:each="flight : ${flights}">
 
-            <div sec:authorize="!isAuthenticated()">
-                This content is only shown to NOT authenticated users.
-            </div>
-        </div>
+                <td th:text="${flight.id}" />
+                <td th:text="${flight?.startAirport?.city?.name}+' ('+${flight.start}+')'" />
+                <td th:text="${flight?.finishAirport?.city?.name}+' ('+${flight.finish}+')'" />
+                <td th:text="${flight.ticket_cost}" />
+
+                <td>
+                    <a class="btn btn-success"
+                       th:href="@{'/cart/add?id='+${flight.id}}">Add to cart</a>
+            </tr>
+        </table>
+
 <!--        <th:block th:insert="blocks/scripts.html :: js" />-->
     </body>
 </html>

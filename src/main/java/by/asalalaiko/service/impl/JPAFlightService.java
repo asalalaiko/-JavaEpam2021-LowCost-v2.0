@@ -52,12 +52,14 @@ public class JPAFlightService implements FlightService {
         BigDecimal taxStartAirport = flight.getStartAirport().getTax();
         BigDecimal taxFinishAirport = flight.getFinishAirport().getTax();
         BigDecimal costFlight = costKm.multiply(BigDecimal.valueOf(km)).add(taxStartAirport).add(taxFinishAirport);
-        BigDecimal costTicket = costFlight.divide(BigDecimal.valueOf(seats),2);
+        BigDecimal minCostTicket = costFlight.divide(BigDecimal.valueOf(seats),2);
+        BigDecimal costTicket = minCostTicket.multiply(minProfit);
         BigDecimal costBaggage = costTicket.multiply(cBaggage);
         BigDecimal costPriority = costTicket.multiply(cPriority);
 
         flight.setProfit(minProfit);
-        flight.setMin_ticket_cost(costTicket);
+        flight.setMin_ticket_cost(minCostTicket);
+        flight.setTicket_cost(costTicket);
         flight.setCostBaggage(costBaggage);
         flight.setCostPriority(costPriority);
         flightRepo.save(flight);

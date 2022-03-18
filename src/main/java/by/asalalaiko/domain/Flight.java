@@ -38,6 +38,8 @@ public class Flight {
     @Column
     private BigDecimal profit;
     @Column
+    private BigDecimal ticket_cost;
+    @Column
     private BigDecimal costBaggage;
     @Column
     private BigDecimal costPriority;
@@ -134,5 +136,21 @@ public class Flight {
 
     public void setProfit(BigDecimal profit) {
         this.profit = profit;
+    }
+
+    public BigDecimal getTicket_cost() {
+        return ticket_cost;
+    }
+
+    public void setTicket_cost(BigDecimal ticket_cost) {
+        this.ticket_cost = ticket_cost;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

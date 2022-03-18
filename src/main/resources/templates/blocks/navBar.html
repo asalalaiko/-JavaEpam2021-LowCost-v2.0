@@ -37,16 +37,9 @@
 				</a></li>
 
 
-				<li sec:authorize="hasAuthority('USER')" class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> User profile </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/sold}">The list of selected issues</a>
-						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/user/address}">Addresses</a>
-						<a sec:authorize="hasAuthority('USER')" class="dropdown-item" th:href="@{/user/orders}">Orders</a>
-
-					</div>
+				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" th:href="@{/user/profile}"> User profile
+					<span class="sr-only">(current)</span>
+				</a>
 				</li>
 			</ul>
 
@@ -64,13 +57,13 @@
 					<input class ="btn btn-outline-success" type="submit" value="Sign Out" />
 				
 			</form>
-			</div >
+			</div>
 
-<!--			<div class="navbar-text my-rg-2">-->
-<!--				 Cart ()-->
-<!--			</div>-->
+			<div class="navbar-text my-rg-2">
+				<a class="nav-link" th:href="@{/cart}">Cart</a>
+			</div>
 
-		</div>
+
 	</nav>
 
 
