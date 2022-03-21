@@ -11,7 +11,7 @@
 <th:block th:insert="blocks/navBar.html :: navBar" />
 
 <div class="container border-5">
-
+    <form method="post" th:action="@{/order}" th:object="${flightsToOrderList}">
     <table class="table table-sm">
         <thead>
         <tr>
@@ -21,21 +21,25 @@
         </tr>
         </thead>
 
-        <tr th:each="flight : ${flights}">
 
-            <td th:text="${flight?.startAirport?.city?.name}+' ('+${flight.start}+') - ' +${flight?.finishAirport?.city?.name}+' ('+${flight.finish}+')'"  />
+        <tr th:each="flightToOrder : ${flightsToOrderList.flightToOrders}">
+
+            <td th:text="${flightToOrder?.flight?.startAirport?.city?.name}+' ('+${flightToOrder?.flight.start}+') - ' +${flightToOrder?.flight?.finishAirport?.city?.name}+' ('+${flightToOrder?.flight.finish}+')'"  />
             <td>
-                <input  type="number" name="quality" step="1" min="1" value="1"/>
+                <input  type="number" th:value="${flightToOrder?.quality}" step="1" min="1"/>
             </td>
 
 
             <td>
                 <a class="btn btn-danger"
-                   th:href="@{'/cart/delete?id='+${flight.id}}">Delete</a>
+                   th:href="@{'/cart/delete?id='+${flightToOrder?.flight.id}}">Delete</a>
             </td>
 
         </tr>
+
     </table>
+        <input type="submit">
+    </form>
 </div>
 
 

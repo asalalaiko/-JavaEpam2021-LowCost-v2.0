@@ -1,6 +1,8 @@
 package by.asalalaiko.controller;
 
 import by.asalalaiko.domain.Flight;
+import by.asalalaiko.domain.FlightToOrder;
+import by.asalalaiko.domain.FlightToOrderList;
 import by.asalalaiko.service.FlightService;
 import by.asalalaiko.service.PlaneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +49,17 @@ public class CartController {
     public String getFlightToCart(Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException{
         try {
 
-            List<Flight> flights = new ArrayList<Flight>();
+            FlightToOrderList flightsToOrderList = new FlightToOrderList();
+            List<FlightToOrder> flightToOrders = new ArrayList<>();
             HashSet<Long> session  =(HashSet<Long>) req.getSession().getAttribute("cartFlights");
             if( session != null) {
                 session.stream().forEach((k) -> {
-                       flights.add(flightService.getFlightById(k));
+                    flightToOrders.add(new FlightToOrder(flightService.getFlightById(k), 1));
                 });
             }
-            model.addAttribute("flights", flights);
+
+            flightsToOrderList.setFlightToOrders((ArrayList<FlightToOrder>) flightToOrders);
+            model.addAttribute("flightsToOrderList", flightsToOrderList);
             return "/cart";
         } catch (Exception e) {
             throw new IOException(e);
