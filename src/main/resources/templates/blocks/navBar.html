@@ -59,8 +59,8 @@
 			</form>
 			</div>
 
-			<div class="navbar-text my-rg-2">
-				<a class="nav-link" th:href="@{/cart}">Cart</a>
+			<div class="navbar-text my-rg-2" th:if="${session.cartFlights != null}">
+				<a class="nav-link" th:href="@{/cart}" th:text="'Cart (' + ${session?.cartFlights?.size()} + ')'" />
 			</div>
 
 

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+
+<div class="container border-5">
+
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Flight</th>
+            <th scope="col">Quality</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+
+        <tr th:each="flight : ${flights}">
+
+            <td th:text="${flight?.startAirport?.city?.name}+' ('+${flight.start}+') - ' +${flight?.finishAirport?.city?.name}+' ('+${flight.finish}+')'"  />
+            <td>
+                <input  type="number" name="quality" step="1" min="1" value="1"/>
+            </td>
+
+
+            <td>
+                <a class="btn btn-danger"
+                   th:href="@{'/cart/delete?id='+${flight.id}}">Delete</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+
+
+</body>
+</html>
