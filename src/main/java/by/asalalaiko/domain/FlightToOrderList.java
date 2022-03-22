@@ -9,10 +9,6 @@ public class FlightToOrderList {
     public FlightToOrderList() {
     }
 
-    public FlightToOrderList(List<FlightToOrder> flightToOrders) {
-
-    }
-
     public ArrayList<FlightToOrder> getFlightToOrders() {
         return flightToOrders;
     }

@@ -49,7 +49,7 @@ public class CartController {
     public String getFlightToCart(Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException{
         try {
 
-            FlightToOrderList flightsToOrderList = new FlightToOrderList();
+            FlightToOrderList flightToOrderList = new FlightToOrderList();
             List<FlightToOrder> flightToOrders = new ArrayList<>();
             HashSet<Long> session  =(HashSet<Long>) req.getSession().getAttribute("cartFlights");
             if( session != null) {
@@ -58,8 +58,9 @@ public class CartController {
                 });
             }
 
-            flightsToOrderList.setFlightToOrders((ArrayList<FlightToOrder>) flightToOrders);
-            model.addAttribute("flightsToOrderList", flightsToOrderList);
+            flightToOrderList.setFlightToOrders((ArrayList<FlightToOrder>) flightToOrders);
+            model.addAttribute("flightToOrderList", flightToOrderList);
+            model.addAttribute("title", "Flight list");
             return "/cart";
         } catch (Exception e) {
             throw new IOException(e);

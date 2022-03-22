@@ -9,6 +9,9 @@ public class FlightToOrder {
     private Integer quality;
 
 
+    public FlightToOrder() {
+    }
+
     public FlightToOrder(Flight flight, Integer quality) {
         this.flight = flight;
         this.quality = quality;
