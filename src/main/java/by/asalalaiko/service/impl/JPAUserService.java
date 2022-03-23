@@ -41,6 +41,11 @@ public class JPAUserService implements UserService {
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        return userRepo.findByLogin(login);
+    }
+
+    @Override
     public boolean addUser(User user) throws MessagingException {
         User userFromDb = userRepo.findByLogin(user.getLogin());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

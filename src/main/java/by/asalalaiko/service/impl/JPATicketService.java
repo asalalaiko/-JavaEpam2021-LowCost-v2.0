@@ -1,9 +1,6 @@
 package by.asalalaiko.service.impl;
 
-import by.asalalaiko.domain.Flight;
-import by.asalalaiko.domain.Plane;
-import by.asalalaiko.domain.Ticket;
-import by.asalalaiko.domain.TicketStatus;
+import by.asalalaiko.domain.*;
 import by.asalalaiko.repo.PlaneRepo;
 import by.asalalaiko.repo.TicketRepo;
 import by.asalalaiko.service.PlaneService;
@@ -30,11 +27,17 @@ public class JPATicketService implements TicketService {
     }
 
     @Override
+    public List<Ticket> getTicketsByOrder(Order order) {
+        return ticketRepo.findByOrder(order);
+    }
+
+    @Override
     public List<Ticket> getFreeTicketsToFlight(Flight flight) {
 
-//        return ticketRepo.FindByFlightAndStatusTicket(flight, TicketStatus.FREE);
-        return null;
+        return ticketRepo.findByFlightAndStatus(flight, TicketStatus.FREE);
     }
+
+
 
     @Override
     public void createTicket(Ticket ticket) {

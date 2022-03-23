@@ -11,7 +11,7 @@
 <th:block th:insert="blocks/navBar.html :: navBar" />
 
 <div class="container border-5">
-    <form method="post" th:action="@{/order}" th:object="${flightToOrderList}">
+    <form method="post" th:action="@{/user/order}" th:object="${flightToOrderList}">
     <table class="table table-sm">
         <thead>
         <tr>

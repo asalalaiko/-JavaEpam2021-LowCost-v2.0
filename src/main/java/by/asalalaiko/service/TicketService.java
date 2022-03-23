@@ -1,6 +1,7 @@
 package by.asalalaiko.service;
 
 import by.asalalaiko.domain.Flight;
+import by.asalalaiko.domain.Order;
 import by.asalalaiko.domain.Ticket;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface TicketService {
     Ticket getTicketById (Long id);
 
     List<Ticket> getTickets();
+
+    List<Ticket> getTicketsByOrder(Order order);
 
     List<Ticket> getFreeTicketsToFlight(Flight flight);
 

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}"></title>
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+
+<div class="container border-5">
+
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tickets</th>
+            </tr>
+            </thead>
+
+
+            <tr th:each="order : ${orders}">
+
+                <td th:text="${order.id}"/>
+                <td th:text="${order.status}"/>
+                <td th:text="${order.tickets?.size()}"/>
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+
+
+</body>
+</html>

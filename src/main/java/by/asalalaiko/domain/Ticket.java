@@ -21,8 +21,8 @@ public class Ticket {
     @JoinColumn(name = "flight_id")
     private Flight flight;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "order_id")
+    private Order order;
     @Column
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
@@ -75,12 +75,12 @@ public class Ticket {
         this.flight = flight;
     }
 
-    public User getUser() {
-        return user;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public TicketStatus getStatus() {

@@ -15,31 +15,46 @@
         <table class="table table-sm">
             <thead>
             <tr>
-                <th scope="col">Flight</th>
-                <th scope="col">Quality</th>
+                <th scope="col">Ticket</th>
+                <th scope="col">Passenger</th>
+                <th scope="col">Baggage</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Cost</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
 
 
-            <tr th:each="flightToOrder : ${flightToOrderList.ers}">
+            <tr th:each="ticket : ${tickets}">
 
-                <td th:text="${flightToOrder?.flight?.startAirport?.city?.name}+' ('+${flightToOrder?.flight.start}+') - ' +${flightToOrder?.flight?.finishAirport?.city?.name}+' ('+${flightToOrder?.flight.finish}+')'"  />
+                <td th:text="${ticket.flight?.id}+'-'+${ticket.flight?.startAirport?.city?.name}+' ('+${ticket.flight.start}+') - ' +${ticket.flight?.finishAirport?.city?.name}+' ('+${ticket.flight.finish}+')'"  />
                 <td>
-                    <!--                <input type="hidden" name="flight" th:field="${flightToOrder?.flight}"/>-->
-                    <input  type="number"  name="quality" th:value="${flightToOrder.quality}" step="1" min="1"/>
+                    <input type="text" th:value="${ticket.passenger}">
+
                 </td>
+                <td>
+                    <input type="checkbox" id="baggage">
+                    <label for="baggage" th:text="${ticket.flight.costBaggage}" />
+                </td>
+                <td>
+                    <input type="checkbox" id="priority">
+                    <label for="priority" th:text="${ticket.flight.costPriority}" />
+                </td>
+                <td>
+                    <label th:text="${ticket.flight.ticket_cost}" />
+                </td>
+
 
 
                 <td>
                     <a class="btn btn-danger"
-                       th:href="@{'/cart/delete?id='+${flightToOrder?.flight.id}}">Delete</a>
+                       th:href="@{'/user/order/'+${order.id}+'/deleteticket?id='+${ticket.id}}">Delete</a>
                 </td>
 
             </tr>
 
         </table>
-        <input type="submit">
+        <input class="btn btn-success" type="submit" value="Pay">
     </form>
 </div>
 

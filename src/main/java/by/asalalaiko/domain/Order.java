@@ -1,6 +1,7 @@
 package by.asalalaiko.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -14,6 +15,8 @@ public class Order {
     @Column
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 
     public Order() {
     }
@@ -40,5 +43,13 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }
