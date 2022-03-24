@@ -1,9 +1,6 @@
 package by.asalalaiko.service.impl;
 
-import by.asalalaiko.domain.Flight;
-import by.asalalaiko.domain.Plane;
-import by.asalalaiko.domain.Ticket;
-import by.asalalaiko.domain.TicketStatus;
+import by.asalalaiko.domain.*;
 import by.asalalaiko.repo.FlightRepo;
 import by.asalalaiko.repo.PlaneRepo;
 import by.asalalaiko.repo.TicketRepo;
@@ -26,6 +23,9 @@ public class JPAFlightService implements FlightService {
     private BigDecimal cBaggage;
     @Value("${coefficient.priority}")
     private BigDecimal cPriority;
+    @Value("${coefficient.every.day}")
+    private BigDecimal eDay;
+
 
     @Autowired
     private FlightRepo flightRepo;
@@ -40,6 +40,11 @@ public class JPAFlightService implements FlightService {
     @Override
     public List<Flight> getFlights() {
         return flightRepo.findAll();
+    }
+
+    @Override
+    public List<Flight> getFlightsByStatus(FlightStatus flightStatus) {
+        return flightRepo.findByStatus(flightStatus);
     }
 
     @Override
@@ -62,13 +67,17 @@ public class JPAFlightService implements FlightService {
         flight.setTicket_cost(costTicket);
         flight.setCostBaggage(costBaggage);
         flight.setCostPriority(costPriority);
+        flight.setStatus(FlightStatus.FREE);
         flightRepo.save(flight);
         
         for (int i=0; i<seats; i++){
             ticketRepo.save(new Ticket(flight, TicketStatus.FREE));
         }
-        ticketRepo.findAll();
+
     }
+
+
+
 
     @Override
     public void updateFlight(Flight plane) { flightRepo.save(plane);
@@ -78,5 +87,19 @@ public class JPAFlightService implements FlightService {
     @Override
     public void deleteById(Long id) {
         flightRepo.deleteById(id);
+    }
+
+    @Override
+    public void updateFlightToMidnight(Flight flight) {
+        BigDecimal profit = flight.getProfit().add(eDay);
+
+        BigDecimal costTicket = flight.getMin_ticket_cost().multiply(profit);
+        BigDecimal costBaggage = costTicket.multiply(cBaggage);
+        BigDecimal costPriority = costTicket.multiply(cPriority);
+
+        flight.setProfit(profit);
+        flight.setCostBaggage(costBaggage);
+        flight.setCostPriority(costPriority);
+        flightRepo.save(flight);
     }
 }
