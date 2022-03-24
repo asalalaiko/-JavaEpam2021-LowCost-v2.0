@@ -30,6 +30,9 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "finishAirport_id")
     private Airport finishAirport;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private FlightStatus status;
     @ManyToOne
     @JoinColumn(name = "plane_id")
     private Plane plane;
@@ -144,6 +147,14 @@ public class Flight {
 
     public void setTicket_cost(BigDecimal ticket_cost) {
         this.ticket_cost = ticket_cost;
+    }
+
+    public FlightStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
     }
 
     public List<Ticket> getTickets() {
