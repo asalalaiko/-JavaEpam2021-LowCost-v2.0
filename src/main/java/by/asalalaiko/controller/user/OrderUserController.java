@@ -47,7 +47,7 @@ public class OrderUserController {
         Order order = orderService.getOrderById(orderId);
         Ticket ticket = ticketService.getTicketById(id);
 
-        if (ticket.getOrder().equals(order)) {
+        if (ticket.getOrder().equals(order) && (order.getStatus() != OrderStatus.PAID)) {
             ticket.setOrder(null);
             ticket.setStatus(TicketStatus.FREE);
             ticketService.updateTicket(ticket);
