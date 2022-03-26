@@ -6,6 +6,8 @@ import by.asalalaiko.repo.TicketRepo;
 import by.asalalaiko.service.PlaneService;
 import by.asalalaiko.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +24,18 @@ public class JPATicketService implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTickets() {
-        return ticketRepo.findAll();
+    public Page<Ticket> getTickets(Pageable pageable) {
+        return ticketRepo.findAll(pageable);
     }
 
     @Override
     public List<Ticket> getTicketsByOrder(Order order) {
         return ticketRepo.findByOrder(order);
+    }
+
+    @Override
+    public Page<Ticket> getTicketsByFlight(Flight flight, Pageable pageable) {
+        return ticketRepo.findByFlight(flight, pageable);
     }
 
     @Override

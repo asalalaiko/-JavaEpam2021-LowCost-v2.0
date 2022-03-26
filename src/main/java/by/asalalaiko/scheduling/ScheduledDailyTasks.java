@@ -21,9 +21,8 @@ public class ScheduledDailyTasks {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledDailyTasks.class);
 
-//    @Scheduled(cron = "@midnight")
-//    @Scheduled(cron = "@hourly")
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 * * * *") //At 00:00
+//   @Scheduled(cron = "0 * * * * *") //At every minute
     public void  recalculationPriceFlight(){
         try {
             LOGGER.info("RecalculationCostTask run.");

@@ -11,21 +11,12 @@
 <th:block th:insert="blocks/navBar.html :: navBar" />
 
     <div class="container border-5">
-<!--            <div class="row justify-content-center  p-1">-->
-<!--                <form method="post" th:action="@{/admin/ticket}" th:object="${ticket}">-->
-<!--                    <input  type="hidden" name="id" th:field="*{flight}"/>-->
-<!--                    <input  type="text" name="name" th:field="*{name}"/>-->
-<!--                    <input  type="text" name="model" th:field="*{model}"/>-->
-<!--                    <input  type="number" name="passenger_seats" th:field="*{passenger_seats}" step="1" min="0"/>-->
-<!--                    <input  type="number" name="cost_1km" th:field="*{cost_1km}" step="0.01" min="0"/>-->
-<!--                    <button type="submit">save</button>-->
-<!--                </form>-->
-<!--            </div>-->
         <table class="table table-sm">
             <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Flight</th>
+                <th scope="col">Order</th>
                 <th scope="col">User</th>
                 <th scope="col">Passenger</th>
                 <th scope="col">Status</th>
@@ -35,28 +26,48 @@
             </tr>
             </thead>
 
-            <tr th:each="ticket : ${tickets}">
+            <tr th:each="ticket : ${tickets.content}">
 
                 <td th:text="${ticket.id}" />
                 <td th:text="${ticket.flight.id}" />
-                <td th:text="${ticket?.user?.login}" />
+                <td th:text="${ticket?.order?.id}" />
+                <td th:text="${ticket?.order?.user?.login}" />
                 <td th:text="${ticket.passenger}" />
                 <td th:text="${ticket.status}" />
                 <td th:text="${ticket.priority?.booleanValue()}" />
                 <td th:text="${ticket.baggage?.booleanValue()}" />
 
 
-<!--                <td>-->
-<!--                    <a class="btn btn-danger"-->
-<!--                       th:href="@{'/admin/plane/delete?id='+${ticket.id}}">Delete</a>-->
-<!--                    <a class="btn btn-success"-->
-<!--                       th:href="@{'/admin/plane/edit?id='+${ticket.id}}">Edit</a> </td>-->
-
-<!--            </tr>-->
         </table>
+
+        <!--  pagination -->
+        <nav aria-label="Pagination" th:if="${tickets.totalPages gt 0}">
+            <ul class="pagination justify-content-center font-weight-medium">
+                <li class="page-item" th:classappend="${tickets.number eq 0} ? 'disabled'">
+                    <a class="page-link svg-icon"
+                       th:href="@{/admin/ticket?page={id}(id=${tickets.number lt 2 ? 1 : tickets.number})}"
+                       aria-label="Previous"
+                       title="Previous Page" rel="tooltip">
+                        <span aria-hidden="true" data-feather="chevrons-left" width="20" height="20"><<</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${i eq tickets.number + 1} ? 'active'"
+                    th:each="i : ${#numbers.sequence( tickets.number + 1, tickets.totalPages > 10 + tickets.number ? tickets.number + 10 : tickets.totalPages, 1)}">
+                    <a class="page-link" th:href="@{/admin/ticket?page={id}(id=${i})}" th:text="${i}"
+                       th:title="${'Page '+ i}"
+                       rel="tooltip"></a>
+                </li>
+                <li class="page-item" th:classappend="${tickets.number + 1 eq tickets.totalPages} ? 'disabled'">
+                    <a class="page-link svg-icon" th:href="@{/admin/ticket?page={id}(id=${tickets.number + 2})}"
+                       aria-label="Next"
+                       title="Next Page" rel="tooltip">
+                        <span aria-hidden="true" data-feather="chevrons-right" width="20" height="20">>></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    </div>
-    </div>
+
 
 </body>
 </html>
