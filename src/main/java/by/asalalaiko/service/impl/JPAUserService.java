@@ -31,7 +31,14 @@ public class JPAUserService implements UserService {
 
     @Override
     public User activateUser(String code) {
-        return null;
+
+        User user =  userRepo.findByActionCode(code);
+        if (user != null){
+            user.setActive(Boolean.TRUE);
+            userRepo.save(user);
+        }
+
+        return user;
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -33,13 +34,13 @@ public class RegistrationController {
 
 
 
-//    @GetMapping("/activate/{id}")
-//    String activation(@PathVariable Integer id) {
-//
-//        //    service.activateUser(id);
-//
-//        return "redirect:/login";
-//    }
+    @GetMapping("/activate")
+    String activationUser(@RequestParam(name = "code", required = true) String code) {
+
+            userService.activateUser(code);
+
+        return "redirect:/login";
+    }
 
     @GetMapping("/register")
     String getForm(Model model) {
