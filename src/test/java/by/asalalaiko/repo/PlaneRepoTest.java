@@ -26,7 +26,7 @@ public class PlaneRepoTest {
 
         planeRepo.save(plane);
 
-        assertEquals(planeRepo.getOne(2L).getName(), plane.getName());
+        assertEquals(planeRepo.getOne(plane.getId()).getName(), plane.getName());
     }
 
     @Test

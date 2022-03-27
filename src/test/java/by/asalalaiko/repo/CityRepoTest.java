@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @ActiveProfiles("test")
-
 public class CityRepoTest {
 
     @Autowired
@@ -30,6 +29,7 @@ public class CityRepoTest {
         assertEquals(cityRepo.findAll().size(), 1);
         cityRepo.delete(city);
     }
+
     @Test
     public void updateCity(){
         City city = setCity();

@@ -15,10 +15,16 @@ public class AirportRepoTest {
 
     @Autowired
     private AirportRepo airportRepo;
+    @Autowired
+    private CityRepo cityRepo;
+
 
     @Test
     public void createAirport(){
+        City city = setCity();
+        cityRepo.save(city);
         Airport airport = setAirport();
+        airport.setCity(city);
         airportRepo.save(airport);
         assertEquals(airportRepo.findAll().size(), 1);
         airportRepo.delete(airport);
@@ -47,9 +53,12 @@ public class AirportRepoTest {
     @Test
     public void findAllAirport(){
 
+        City city = setCity();
+        cityRepo.save(city);
+
         for(int i = 0; i<100; i++){
             Airport airport = setAirport();
-            City city = setCity();
+            airport.setCity(city);
             airport.setName("Airport"+ i);
             airportRepo.save(airport);
         }
@@ -59,10 +68,8 @@ public class AirportRepoTest {
 
 
     private Airport setAirport(){
-        //City city = setCity();
         Airport airport = new Airport();
         airport.setName("London Fly");
-       // airport.setCity(city);
         return airport;
     }
     private City setCity(){
