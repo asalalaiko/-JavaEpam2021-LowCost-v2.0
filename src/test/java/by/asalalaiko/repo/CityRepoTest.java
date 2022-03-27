@@ -5,7 +5,9 @@ import by.asalalaiko.domain.User;
 import by.asalalaiko.domain.UsersRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.sql.Timestamp;
@@ -14,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @ActiveProfiles("test")
+
 public class CityRepoTest {
 
     @Autowired
@@ -34,7 +37,8 @@ public class CityRepoTest {
 
         city.setName("Vilnus");
         cityRepo.save(city);
-        assertEquals(cityRepo.getOne(1L).getName(), "Vilnus");
+
+        assertEquals(cityRepo.getOne(city.getId()).getName(), "Vilnus");
     }
 
     @Test

@@ -27,7 +27,7 @@ public class UserRepoTest {
         userRepo.save(user);
 
         assertEquals(user.getLogin(), "user");
-        assertEquals(userRepo.getOne(1L), user);
+        assertEquals(userRepo.getOne(user.getId()), user);
     }
 
     @Test

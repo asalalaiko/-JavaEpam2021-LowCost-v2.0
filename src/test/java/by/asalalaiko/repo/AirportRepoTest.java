@@ -31,7 +31,7 @@ public class AirportRepoTest {
         Airport airport = setAirport();
         airport.setName("Vilnus  Fly");
         airportRepo.save(airport);
-        assertEquals(airportRepo.getOne(1L).getName(), "Vilnus  Fly");
+        assertEquals(airportRepo.getOne(airport.getId()).getName(), "Vilnus  Fly");
     }
 
 
@@ -51,7 +51,6 @@ public class AirportRepoTest {
             Airport airport = setAirport();
             City city = setCity();
             airport.setName("Airport"+ i);
-            airport.setCity(city);
             airportRepo.save(airport);
         }
         assertEquals(airportRepo.findAll().size(), 100);
