@@ -19,7 +19,7 @@ public class UserAuthService implements UserDetailsService {
 
         User user = userRepo.findByLogin(username);
 
-        if (user == null || user.getActive()==false || user.getLocked()==true) {
+        if (user == null) {
             throw new UsernameNotFoundException("User not found, or don't activated");
         }
         if (user.getActive()==false) {
