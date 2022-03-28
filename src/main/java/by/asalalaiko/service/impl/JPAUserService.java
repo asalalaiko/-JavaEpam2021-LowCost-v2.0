@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,7 +26,12 @@ public class JPAUserService implements UserService {
     public EmailService emailService;
 
     @Override
-    public void lockUnlockById(Long id) {}
+    public void lockUnlockById(Long id) {
+        User user = userRepo.findById(id).get();
+        user.setLocked(false);
+        userRepo.save(user);
+    }
+
 
     @Override
     public User activateUser(String code) {
