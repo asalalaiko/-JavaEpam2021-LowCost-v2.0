@@ -2,6 +2,7 @@ package by.asalalaiko.controller;
 
 import by.asalalaiko.domain.CaptchaResponseDto;
 import by.asalalaiko.domain.User;
+import by.asalalaiko.exception.UserNotFoundException;
 import by.asalalaiko.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.mail.MessagingException;
@@ -41,14 +39,17 @@ public class RegistrationController {
 
     @GetMapping("/activate")
     String activationUser(@RequestParam(name = "code", required = true) String code) {
-        try {
-            userService.activateUser(code);
-        } catch(Exception handlerException){
 
-        }
+            User user = userService.activateUser(code);
+            if (user==null)
+                throw new  UserNotFoundException(code);
 
-        return "redirect:/login";
+            LOGGER.info("Activation user", user.getLogin());
+
+   return "redirect:/login";
     }
+
+
 
     @GetMapping("/register")
     String getForm(Model model) {
@@ -84,12 +85,8 @@ public class RegistrationController {
             model.addAttribute("usernameError", "User exists!");
             return "registration";
         }
-
-
-
         return "redirect:/login";
     }
-
 
 }
 

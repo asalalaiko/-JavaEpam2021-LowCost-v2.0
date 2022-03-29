@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security3">
+
+<head>
+    <title th:text="${title}" />
+    <th:block th:insert="blocks/header.html :: header" />
+</head>
+
+
+<body>
+
+<th:block th:insert="blocks/navBar.html :: navBar" />
+<div class="container">
+    <div class="alert alert-warning mx-auto my-6" role="alert">
+        Something went wrong, try again.
+        <span th:text="${message}"/>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

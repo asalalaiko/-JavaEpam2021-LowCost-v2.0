@@ -19,11 +19,4 @@ public class HomePageController {
         return "index";
     }
 
-
-//    @GetMapping("/index")
-//    public String index (Model model){
-//        model.addAttribute("title", "Main page");
-//        model.addAttribute("users", userService.findAllUsers());
-//        return "index";
-//    }
 }
