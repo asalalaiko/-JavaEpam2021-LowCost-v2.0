@@ -3,6 +3,8 @@ package by.asalalaiko.controller.admin;
 
 
 import by.asalalaiko.domain.Plane;
+import by.asalalaiko.exception.PlaneNotFoundException;
+import by.asalalaiko.exception.UserNotFoundException;
 import by.asalalaiko.service.PlaneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,8 @@ public class PlaneAdminController {
 
     @GetMapping("/admin/plane/delete")
     public String deletePlane(@RequestParam(value="id") Long id){
+        if (id==null)
+            throw new PlaneNotFoundException();
         planeService.deleteById(id);
         return "redirect:/admin/plane";
     }

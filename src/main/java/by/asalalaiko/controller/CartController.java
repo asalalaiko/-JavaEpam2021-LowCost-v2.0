@@ -3,8 +3,11 @@ package by.asalalaiko.controller;
 import by.asalalaiko.domain.Flight;
 import by.asalalaiko.domain.FlightToOrder;
 import by.asalalaiko.domain.FlightToOrderList;
+import by.asalalaiko.exception.MyExceptionHandler;
 import by.asalalaiko.service.FlightService;
 import by.asalalaiko.service.PlaneService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +24,19 @@ import java.util.List;
 @Controller
 public class CartController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartController.class);
+
     @Autowired
     private FlightService flightService;
 
+//for a cart on cookies to go unique id of flights
     @GetMapping("/cart/add")
     protected void addToCart (HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String referer = req.getHeader("Referer");
         HashSet<Long> cartFlights =  new HashSet <Long>();
         HashSet<Long> session  =(HashSet<Long>) req.getSession().getAttribute("cartFlights");
-        if( session != null) {cartFlights.addAll(session);}
+        if( session != null) {
+            cartFlights.addAll(session);}
 
         Long flightId = Long.valueOf(req.getParameter("id"));
 
@@ -44,7 +51,7 @@ public class CartController {
         }
     }
 
-
+//view cart content
     @GetMapping("/cart")
     public String getFlightToCart(Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException{
         try {
@@ -66,7 +73,7 @@ public class CartController {
             throw new IOException(e);
         }
     }
-
+//delete flight for Id
     @GetMapping("/cart/delete")
     protected void dellToCart (HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long id = Long.valueOf(req.getParameter("id"));

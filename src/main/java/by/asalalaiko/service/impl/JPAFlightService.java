@@ -47,6 +47,15 @@ public class JPAFlightService implements FlightService {
         return flightRepo.findByStatus(flightStatus);
     }
 
+//    when creating a new flight, the following are used for calculation:
+//    the cost of airport tax (departure and reception), the distance between airports is multiplied by the cost of flying 1 km of the aircraft
+//    minimum cost for one passenger - the total cost of the flight divided by the number of seats on the plane
+//    The minimum profit is taken and the values in the profit settings are recalculated daily at midnight
+//
+//    ticket price is:
+//    the minimum cost of a ticket for a flight is multiplied by profit
+//    the cost of baggage is obtained: the cost of the ticket is multiplied by the coefficient
+//    the cost of pre-booking is obtained: the cost of the ticket is multiplied by the coefficient
     @Override
     @Transactional
     public void createFlight(Flight flight) {
@@ -89,6 +98,8 @@ public class JPAFlightService implements FlightService {
         flightRepo.deleteById(id);
     }
 
+
+    //weekly recalculation of the ticket price for the flight
     @Override
     public void updateFlightToMidnight(Flight flight) {
         BigDecimal profit = flight.getProfit().add(eDay);

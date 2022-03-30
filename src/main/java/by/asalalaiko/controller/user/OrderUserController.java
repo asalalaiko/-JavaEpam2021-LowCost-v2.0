@@ -21,16 +21,18 @@ public class OrderUserController {
     @Autowired
     private TicketService ticketService;
 
+
+    //post request for create Order
     @PostMapping("/user/order")
     String createOrder(@ModelAttribute FlightToOrderList flightToOrderList, Authentication authentication) {
 
         User user = userService.getUserByLogin(authentication.getName());
-
         Order order = orderService.createOrder(flightToOrderList, user);
 
         return "redirect:/user/order?id="+order.getId();
     }
 
+    //list tickets for User's order
     @GetMapping("/user/order")
     String getOrder(@RequestParam(value="id") Long id, Model model){
 
@@ -40,7 +42,7 @@ public class OrderUserController {
         model.addAttribute("tickets", ticketService.getTicketsByOrder(order));
         return "/user/order";}
 
-
+    //delete ticket from User's order
     @GetMapping("/user/order/{orderId}/deleteticket")
     String deleteTicketToOrder(@PathVariable("orderId") Long orderId, @RequestParam(value="id") Long id){
 
@@ -57,7 +59,7 @@ public class OrderUserController {
     }
 
 
-
+    //List  User's order
     @GetMapping("/user/orders")
     String getOrders(Model model, Authentication authentication){
 

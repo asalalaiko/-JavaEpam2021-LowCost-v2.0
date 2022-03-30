@@ -4,6 +4,8 @@ package by.asalalaiko.controller.admin;
 
 
 import by.asalalaiko.domain.Flight;
+import by.asalalaiko.exception.FlightNotFoundException;
+import by.asalalaiko.exception.TicketNotFoundException;
 import by.asalalaiko.service.AirportService;
 import by.asalalaiko.service.FlightService;
 import by.asalalaiko.service.PlaneService;
@@ -49,6 +51,10 @@ public class FlightAdminController {
 
     @GetMapping("/admin/flight/delete")
     public String deleteFlight(@RequestParam(value="id") Long id){
+
+        if(id==null){
+            throw new FlightNotFoundException();
+        }
         flightService.deleteById(id);
         return "redirect:/admin/flight";
     }

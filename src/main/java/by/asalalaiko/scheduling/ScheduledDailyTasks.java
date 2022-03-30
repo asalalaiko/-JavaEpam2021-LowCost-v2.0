@@ -21,6 +21,8 @@ public class ScheduledDailyTasks {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledDailyTasks.class);
 
+
+    //Every At 00:00 recalculation price to flight
     @Scheduled(cron = "0 0 0 * * *") //At 00:00
 //   @Scheduled(cron = "0 * * * * *") //At every minute
     public void  recalculationPriceFlight(){

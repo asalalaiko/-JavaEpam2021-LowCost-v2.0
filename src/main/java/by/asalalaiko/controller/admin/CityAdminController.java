@@ -2,6 +2,8 @@ package by.asalalaiko.controller.admin;
 
 
 import by.asalalaiko.domain.City;
+import by.asalalaiko.exception.CityNotFoundException;
+import by.asalalaiko.exception.PlaneNotFoundException;
 import by.asalalaiko.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,8 @@ public class CityAdminController {
 
     @GetMapping("/admin/city/delete")
     public String deleteCity(@RequestParam(value="id") Long id){
+        if (id==null)
+            throw new CityNotFoundException();
         cityService.deleteById(id);
         return "redirect:/admin/city";
     }

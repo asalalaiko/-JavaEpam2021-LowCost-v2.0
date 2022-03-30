@@ -36,7 +36,7 @@ public class RegistrationController {
     private RestTemplate restTemplate;
 
 
-
+//activation of the User by the code that is sent to e-mail during registration
     @GetMapping("/activate")
     String activationUser(@RequestParam(name = "code", required = true) String code) {
 
@@ -50,7 +50,7 @@ public class RegistrationController {
     }
 
 
-
+//form registration User
     @GetMapping("/register")
     String getForm(Model model) {
         model.addAttribute("title", "Registration page");
@@ -58,7 +58,7 @@ public class RegistrationController {
         return "registration";
     }
 
-
+//registration User
     @PostMapping("/register")
     String registerPage(@RequestParam("g-recaptcha-response") String captchaResponse,
                         @Valid User user,

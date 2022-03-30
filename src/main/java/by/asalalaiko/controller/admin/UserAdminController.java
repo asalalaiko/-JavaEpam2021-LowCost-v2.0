@@ -1,6 +1,7 @@
 package by.asalalaiko.controller.admin;
 
 import by.asalalaiko.domain.User;
+import by.asalalaiko.exception.UserNotFoundException;
 import by.asalalaiko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,22 +29,16 @@ public class UserAdminController {
     @GetMapping("/admin/user")
     String getUser(@RequestParam(required = false) String id, Model model) {
 
-        if (id!=null){
+        if (id==null){
+            throw new UserNotFoundException();}
 
             model.addAttribute("title", "Admin - User");
-            model.addAttribute("user", userService.getUser(Long.valueOf(id)));}
+            model.addAttribute("user", userService.getUser(Long.valueOf(id)));
 
             return "/admin/user";
     }
 
 
-//     @PostMapping ("/admin/user")
-//     String saveUser(@Valid User user, BindingResult bindingResult) {
-//
-//        userService.saveUser(user);
-//
-//         return "/admin/users";
-//     }
         @PostMapping ("/admin/user/edit")
         String editUser(@RequestParam (value="id") Long id, @RequestParam String login) {
             User user = userService.getUser(id);

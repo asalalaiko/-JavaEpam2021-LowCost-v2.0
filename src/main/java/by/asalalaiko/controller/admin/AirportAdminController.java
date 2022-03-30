@@ -2,6 +2,8 @@ package by.asalalaiko.controller.admin;
 
 import by.asalalaiko.domain.Airport;
 import by.asalalaiko.domain.City;
+import by.asalalaiko.exception.AirportNotFoundException;
+import by.asalalaiko.exception.PlaneNotFoundException;
 import by.asalalaiko.service.AirportService;
 import by.asalalaiko.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class AirportAdminController {
 
     @GetMapping("/admin/airport/delete")
     public String deleteAirport(@RequestParam(value="id") Long id){
+        if (id==null)
+            throw new AirportNotFoundException();
+
         airportService.deleteById(id);
         return "redirect:/admin/airport";
     }
