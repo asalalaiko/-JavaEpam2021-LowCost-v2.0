@@ -1,5 +1,5 @@
 JavaEpam-LowCost v2.0
-Сourse project EPAM Java basic course online
+Сourse project for EPAM 
 
 Task
 LowCost-Airline system. The client orders and pays for a ticket for a flight, taking into account the presence / absence of baggage and the right of priority check-in and boarding (the ticket price is lower than the cost of baggage). As the flight date approaches or the aircraft is full, the ticket price should increase
